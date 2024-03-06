@@ -1379,11 +1379,14 @@ Error VulkanContext::_create_physical_device(VkSurfaceKHR p_surface) {
 	vkGetPhysicalDeviceFeatures(gpu, &features);
 
 	// Check required features and abort if any of them is missing.
-	if (!features.imageCubeArray || !features.independentBlend) {
+	if (
+		// !features.imageCubeArray ||
+		!features.independentBlend
+	) {
 		String error_string = vformat("Your GPU (%s) does not support the following features which are required to use Vulkan-based renderers in Godot:\n\n", device_name);
-		if (!features.imageCubeArray) {
-			error_string += "- No support for image cube arrays.\n";
-		}
+		// if (!features.imageCubeArray) {
+		// 	error_string += "- No support for image cube arrays.\n";
+		// }
 		if (!features.independentBlend) {
 			error_string += "- No support for independentBlend.\n";
 		}
